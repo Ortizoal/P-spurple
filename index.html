@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P's Purple - Makeup & Hairstyling</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">💜 P's Purple</span>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#rate-card">Rate Card</a></li>
+                <li><a href="#booking">Book Now</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to P's Purple</h1>
+            <p>Professional Makeup & Hairstyling Services</p>
+            <button class="btn btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})">Book an Appointment</button>
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p class="services-intro">Welcome to P's Purple - Your Professional Makeup & Hairstyling Partner</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Bridal Packages</h3>
+                    <p>Complete makeup solutions for your special day from trial to event</p>
+                    <button class="btn btn-secondary" onclick="viewPackage('bridal')">View Packages</button>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-sparkles"></i>
+                    <h3>Additional Services</h3>
+                    <p>Extra services for bridesmaids, family members, and special events</p>
+                    <button class="btn btn-secondary" onclick="viewPackage('extras')">View Services</button>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-car"></i>
+                    <h3>Travel & Transport</h3>
+                    <p>Convenient home service and transportation options available</p>
+                    <button class="btn btn-secondary" onclick="viewPackage('travel')">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="packages">
+        <div class="container">
+            <h2>Service Packages</h2>
+            <div class="packages-grid" id="packagesContainer">
+                <!-- Packages will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Rate Card Section -->
+    <section id="rate-card" class="rate-card">
+        <div class="container">
+            <h2>Rate Card</h2>
+            <div class="rate-card-content">
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Duration</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rateCardBody">
+                        <!-- Will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <h2>Book Your Appointment</h2>
+            <form id="bookingForm" class="booking-form">
+                <div class="form-group">
+                    <label for="clientName">Full Name *</label>
+                    <input type="text" id="clientName" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientEmail">Email *</label>
+                    <input type="email" id="clientEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">Phone Number *</label>
+                    <input type="tel" id="clientPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Package *</label>
+                    <select id="service" required>
+                        <option value="">Select a package</option>
+                        <option value="Bridal Trial & Consultation">Bridal Trial & Consultation - GHS 300</option>
+                        <option value="Silver Package">Silver Package - GHS 2,000</option>
+                        <option value="Premium Package - Same Day">Premium Package - Same Day - GHS 3,500</option>
+                        <option value="Chic Luxe Package">Chic Luxe Package - GHS 4,500</option>
+                        <option value="Opulent Package">Opulent Package - GHS 5,500</option>
+                        <option value="The Purple Experience">The Purple Experience - GHS 7,000</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentDate">Date *</label>
+                    <input type="date" id="appointmentDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentTime">Time *</label>
+                    <input type="time" id="appointmentTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Special Notes</label>
+                    <textarea id="notes" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm Booking</button>
+            </form>
+            <div id="bookingMessage" class="message" style="display:none;"></div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2>Dashboard</h2>
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" onclick="switchTab('appointments')">
+                    <i class="fas fa-calendar"></i> Appointments
+                </button>
+                <button class="tab-btn" onclick="switchTab('insights')">
+                    <i class="fas fa-chart-bar"></i> Insights
+                </button>
+                <button class="tab-btn" onclick="switchTab('calendar')">
+                    <i class="fas fa-calendar-alt"></i> Calendar
+                </button>
+            </div>
+
+            <!-- Appointments Tab -->
+            <div id="appointments" class="tab-content active">
+                <h3>Upcoming Appointments</h3>
+                <div id="appointmentsList" class="appointments-list">
+                    <!-- Appointments will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Insights Tab -->
+            <div id="insights" class="tab-content">
+                <h3>Business Insights</h3>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <h4>Total Bookings</h4>
+                        <p class="insight-number" id="totalBookings">0</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>Revenue</h4>
+                        <p class="insight-number" id="totalRevenue">$0</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>Avg Rating</h4>
+                        <p class="insight-number" id="avgRating">4.8 ⭐</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>Clients This Month</h4>
+                        <p class="insight-number" id="clientsMonth">0</p>
+                    </div>
+                </div>
+                <div class="insights-chart">
+                    <h4>Monthly Revenue Trend</h4>
+                    <div id="chartContainer" class="chart">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Tab -->
+            <div id="calendar" class="tab-content">
+                <h3>Calendar View</h3>
+                <div class="calendar-container">
+                    <div class="calendar-nav">
+                        <button onclick="prevMonth()"><i class="fas fa-chevron-left"></i></button>
+                        <h4 id="monthYear"></h4>
+                        <button onclick="nextMonth()"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div id="calendarGrid" class="calendar-grid">
+                        <!-- Calendar will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policies Section -->
+    <section class="policies">
+        <div class="container">
+            <h2>Important Policies & Information</h2>
+            <div class="policies-grid">
+                <div class="policy-card">
+                    <h4><i class="fas fa-credit-card"></i> Payment Policy</h4>
+                    <ul>
+                        <li>70% deposit (Non-Refundable) required to confirm booking</li>
+                        <li>Remaining amount due 2 weeks before event</li>
+                        <li>By depositing, you accept all terms and policies</li>
+                        <li>No refund provided in case of cancellation</li>
+                    </ul>
+                </div>
+                <div class="policy-card">
+                    <h4><i class="fas fa-map-marker-alt"></i> Travel & Transport</h4>
+                    <ul>
+                        <li>Same day events: GHS 150-250</li>
+                        <li>Different day events: GHS 300-500</li>
+                        <li>3+ dress-up locations: Extra fees apply</li>
+                        <li>Outside Accra: Flight only (contact for quotes)</li>
+                    </ul>
+                </div>
+                <div class="policy-card">
+                    <h4><i class="fas fa-clock"></i> Booking & Time</h4>
+                    <ul>
+                        <li>Ask for availability first</li>
+                        <li>Make deposit to confirm booking</li>
+                        <li>Keep to agreed time</li>
+                        <li>Delay charges: GHS 100 per 30 minutes</li>
+                    </ul>
+                </div>
+                <div class="policy-card">
+                    <h4><i class="fas fa-hotel"></i> For Out-of-Town Events</h4>
+                    <ul>
+                        <li>Suitable hotel accommodation required</li>
+                        <li>Hotel must be closer to client's lodging</li>
+                        <li>Accommodation decided 1 week before event</li>
+                        <li>Hotel preferred (not guest house or motel)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 P's Purple. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/ps_purple__?igsh=YmtiZXFqYjl1Mjk=" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
